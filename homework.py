@@ -62,14 +62,14 @@ class Training:
 class Running(Training):
     """Тренировка: бег."""
 
-    cal_speed_multiplier: int = 18
-    cal_speed_subtrahend: int = 20
+    CAL_SPEED_MULTIPLIER: int = 18
+    CAL_SPEED_SUBTRAHEND: int = 20
 
     def get_spent_calories(self) -> float:
         """Бег: получить количество затраченных калорий."""
-        return ((self.cal_speed_multiplier
+        return ((self.CAL_SPEED_MULTIPLIER
                 * self.get_mean_speed()
-                - self.cal_speed_subtrahend)
+                - self.CAL_SPEED_SUBTRAHEND)
                 * self.weight / self.M_IN_KM
                 * self.duration * self.MIN_IN_H)
 
@@ -77,11 +77,10 @@ class Running(Training):
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
 
-    height: float
     MIN_IN_H: int = 60
-    cal_weight_multiplier: float = 0.035
-    cal_speed_exp: int = 2
-    cal_weight_multiplicand: float = 0.029
+    CAL_WEIGHT_MULTIPLIER: float = 0.035
+    CAL_SPEED_EXP: int = 2
+    CAL_WEIGHT_MULTIPLICAND: float = 0.029
 
     def __init__(self,
                  action: int,
@@ -94,21 +93,19 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         """Ходьба: получить количество затраченных калорий."""
-        return ((self.cal_weight_multiplier * self.weight
-                + (self.get_mean_speed() ** self.cal_speed_exp
+        return ((self.CAL_WEIGHT_MULTIPLIER * self.weight
+                + (self.get_mean_speed() ** self.CAL_SPEED_EXP
                  // self.height)
-                * self.cal_weight_multiplicand * self.weight)
+                * self.CAL_WEIGHT_MULTIPLICAND * self.weight)
                 * self.duration * self.MIN_IN_H)
 
 
 class Swimming(Training):
     """Тренировка: плавание."""
 
-    length_pool: float
-    count_pool: float
     LEN_STEP: float = 1.38
-    cal_speed_addend: float = 1.1
-    cal_weight_multiplicand: int = 2
+    CAL_SPEED_ADDEND: float = 1.1
+    CAL_WEIGHT_MULTIPLICAND: int = 2
 
     def __init__(self,
                  action: int,
@@ -130,8 +127,8 @@ class Swimming(Training):
         """Плавание: получить количество затраченных калорий."""
 
         return ((self.get_mean_speed()
-                + self.cal_speed_addend)
-                * self.cal_weight_multiplicand * self.weight)
+                + self.CAL_SPEED_ADDEND)
+                * self.CAL_WEIGHT_MULTIPLICAND * self.weight)
 
 
 def read_package(workout_type: str, data: List[int]) -> Training:
