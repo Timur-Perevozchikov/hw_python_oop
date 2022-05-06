@@ -77,7 +77,6 @@ class Running(Training):
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
 
-    MIN_IN_H: int = 60
     CAL_WEIGHT_MULTIPLIER: float = 0.035
     CAL_SPEED_EXP: int = 2
     CAL_WEIGHT_MULTIPLICAND: float = 0.029
